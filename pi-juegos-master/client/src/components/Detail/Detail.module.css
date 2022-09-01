@@ -1,0 +1,43 @@
+.imagen{
+    width: 60%;
+    height: 20%;
+    border-radius: 0px;
+    box-shadow: 0px 1px 10px blue;
+}
+
+.container{
+    color: white;
+    background-color: black;
+    margin-top: 0px;
+    margin-bottom: 10%;
+}
+
+.div{
+    color: white;
+    background-color: black;
+    margin: 1% 10%;
+    box-shadow: 0px 1px 10px blue;
+}
+
+p{
+    text-align: justify;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.boton{
+  background-color: black;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 5px;
+  box-shadow: 0px 1px 10px blue;
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.boton:hover{
+    box-shadow: 0px 1px 10px red;
+}
