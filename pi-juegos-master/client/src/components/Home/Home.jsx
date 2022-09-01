@@ -18,7 +18,7 @@ export default function Home (){
 
     const [currentPage, setCurrentPage] = useState(1);  //con este estado local me guardo la pagina actual, arrancando en la 1
 
-    const [videogamesPerPage, setVideogamesPerPage] = useState(9); //con este estado local me guardo cuantos videojuegos tendre por pagina
+    const [videogamesPerPage, setVideogamesPerPage] = useState(15); //con este estado local me guardo cuantos videojuegos tendre por pagina
 
     const indexOfLastVideogame = currentPage * videogamesPerPage; //indice del ultimo personaje
 
