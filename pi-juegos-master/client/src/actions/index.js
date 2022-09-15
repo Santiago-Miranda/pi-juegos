@@ -1,4 +1,5 @@
 import axios from "axios";
+import fetch from "fetch";
 
 //aca se conecta el back con el front
 
@@ -11,6 +12,8 @@ export function getVideogames() { //obtener todos los videojuegos
         })
     }
 }
+
+
 
 export function filterCreated(payload) { //filtrar por creados
     return {
@@ -33,6 +36,7 @@ export function orderByRating(payload) { //ordernar por rating asc o desc
     }
 }
 
+
 export function getNameVideogames(payload) { //obtener videojuegos por nombre
     return async function (dispatch) {
         try {
@@ -47,6 +51,9 @@ export function getNameVideogames(payload) { //obtener videojuegos por nombre
     }
 }
 
+
+
+
 export function getGenres() { //obtener generos
     return async function (dispatch) {
         let info = await axios.get("http://localhost:3001/genres");
@@ -58,18 +65,10 @@ export function getGenres() { //obtener generos
     }
 }
 
-export function filterByGenre(payload) {
+export function filterByGenre(payload) {//filtrame por generados o creados
     return {
         type: "FILTER_BY_GENRE",
         payload
-    }
-}
-
-export function postVideogame(payload) { //crear videojuego
-    return async function () {
-        const response = await axios.post("http://localhost:3001/videogame", payload);
-
-        return response
     }
 }
 
@@ -86,4 +85,48 @@ export function getDetail(payload) { //obtener detalle del videojuego(ID)
             console.log(error)
         }
     }
+}
+
+export function clearDetail (){
+    return {
+        type: "CLEAR_DETAIL",
+        payload: []
+    }
+    
+}
+
+export function postVideogame(payload) { //crear videojuego
+    return async function () {
+        const response = await axios.post("http://localhost:3001/videogame", payload);
+        return response
+    }
+}
+
+export function deleteVideogame(id){//eliminar videojuego
+    return async function(dispatch){
+        await axios.delete(`http://localhost:3001/videogame/${id}`)
+        dispatch({
+            type: "DELETE_VIDEOGAME",
+            payload: id
+        })
+    }
+}
+
+export function updateVideogame(id){//actualizar videojuego
+    return async function(dispatch){
+        await axios.put(`http://localhost:3001/videogame/${id}`)
+        dispatch({
+            type: "UPDATE_VIDEOGAME",
+            payload: id
+        })
+    }
+}
+
+export function guardarPage(payload){
+   return function(dispatch){
+    return dispatch({
+     type: "GUARDAR_PAGE",
+     payload
+    })
+   }
 }

@@ -16,4 +16,9 @@ router.use("/videogames", videogamesRoute)
 router.use("/videogame", videogameRoute)
 
 
+
+router.get('*', (req, res)=>{
+    res.status(404).send("La ruta ingresada no existe")
+})
+
 module.exports = router;

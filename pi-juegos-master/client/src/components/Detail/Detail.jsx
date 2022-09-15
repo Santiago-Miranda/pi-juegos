@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../../actions";
 import style from "./Detail.module.css"
+import ErrorRoute from "../error/ErrorRoute";
+import { deleteVideogame, clearDetail, getDetail } from "../../actions";
 
 export default function Detail(){
 
@@ -12,19 +13,38 @@ export default function Detail(){
 
     useEffect(() => { //se manda la accion al store para hacer la logica
         dispatch(getDetail(id)); //de esta forma accedo al ID
-    }, [dispatch,id]);
+        return(()=>{
+          dispatch(clearDetail())
+        })
+      }, [dispatch,id]);
 
     const myVideogame = useSelector(state => state.detail); //uso el estado del reducer
 
     console.log(myVideogame)
 
-    if (myVideogame) {
+
+    if (myVideogame.id == id) {
         return (
-          <div className={style.container}>
+          <div key={id} className={style.container}>
             <div className={style.div}>
-              <Link to="/home">
-                <button className={style.boton}>Volver al Home</button>
+              <Link  to="/home">
+                <div>
+                  <button className={style.boton}>Volver al Home</button>
+                  
+                </div>
+               
+                <div className={style.container_delete}>
+                  <p>{id && id.length > 6?
+                  <button className={style.delete} onClick={()=>{
+                  dispatch(deleteVideogame(id))}}>Delete juego</button>
+                  :
+                  <></>
+                  }</p>
+                </div>
               </Link>
+              
+              
+
                 <h1>{myVideogame.name}</h1>
                 <img className={style.imagen} src={myVideogame.image} alt="Imagen no encontrada"/>
                 <h2>Rating: {myVideogame.rating}</h2>
@@ -39,10 +59,7 @@ export default function Detail(){
       } else {
         return (
           <div>
-            Ups! Algo malo ha pasado, regresa al Home!
-            <Link to="/home">
-              <button>Volver</button>
-            </Link>
+           <ErrorRoute/>
           </div>
         );
       }

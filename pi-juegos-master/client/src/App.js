@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage/LandingPage.jsx"
 import Home from "./components/Home/Home.jsx"
 import VideogameCreated from './components/VideogamesCreated/VideogamesCreated.jsx';
 import Detail from './components/Detail/Detail.jsx';
+import  ErrorRoute  from './components/error/ErrorRoute';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/home" element={<Home/>}/>
         <Route exact path="/videogame" element={<VideogameCreated/>}/>
         <Route exact path="/home/:id" element={<Detail/>}/>
+        <Route path="*" element={<ErrorRoute/>}/>
       </Routes>
     </div>
     </BrowserRouter>

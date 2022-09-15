@@ -16,6 +16,8 @@ const axios = require('axios');
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+
+
 router.get("/", async (req, res) => {
 
 

@@ -10,6 +10,9 @@ export default function SearchBar(){
 
     const [name, setName] = useState("");
 
+   
+
+
    function handleInputChange(e){ //setea los cambios que escriba el usuario en el input
        e.preventDefault();
        setName(e.target.value)
@@ -24,11 +27,11 @@ export default function SearchBar(){
     return(
         <div>
             <input
-            className={style.input}
-            value={name}
-            type="text"
-            placeholder="Buscar Videojuego..."
-            onChange={(e) => handleInputChange(e)}
+               className={style.input}
+               value={name}
+               type="text"
+               placeholder="Buscar Videojuego..."
+               onChange={(e) => handleInputChange(e)}
             />
             <button className={style.boton} type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
         </div>

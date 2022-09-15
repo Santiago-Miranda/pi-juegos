@@ -1,0 +1,29 @@
+
+.ruta{
+    font-size: 50px;
+    color: white;
+    text-align: center;
+}
+
+.volver {
+    cursor: pointer;
+    font-size:24px;
+    font-family:Arial;
+    width:200px;
+    height:38px;
+    border-width:2px;
+    color:#fff;
+    box-shadow: 0px 1px 10px red;
+    font-weight:bold;
+    border-top-left-radius:24px;
+    border-top-right-radius:24px;
+    border-bottom-left-radius:24px;
+    border-bottom-right-radius:24px;
+    text-shadow: 1px 5px 5px red;
+    background:rgba(0, 7, 2, 1);
+  }
+  
+  .volver:hover {
+    box-shadow: 0px 1px 10px blue;
+    text-shadow: 1px 5px 5px blue;
+  }

@@ -8,8 +8,8 @@ function validate(input){  //usado para validad errores
 
     let errors = {};
 
-    if (!input.name){
-        errors.name = "Se requiere un nombre"
+    if(input.name.length >= 0 && !input.name.match(/^[a-zA-Z_]+( [a-zA-Z_]+)*$/)){
+        errors.name = 'Solo se permiten letras y sin espacios al final!'
     }
      if (!input.description){
         errors.description = "Se requiere una descripción";
@@ -24,14 +24,13 @@ function validate(input){  //usado para validad errores
     } else if (/^[+-]?\d+([,.]\d+)?$/.test(input.rating) === false){
         errors.rating = "Formato de Rating debe ser como de minimo 0.1 hasta 5"
     }
-    if (!input.image){
-        errors.image = "Se requiere una imagen";
-    } else if (/^https:/.test(input.image) === false){
-        errors.image = "URL de imagen inválido"
-    }
+    if(input.image.length > 0 && !input.image.match(/^(ftp|http|https):\/\/[^ "]+$/)){
+        errors.image = 'La imagen tiene que ser un URL'
+    }else errors.image = null
 
     return errors;
 }
+
 
 export default function VideogameCreated(){
 
@@ -101,12 +100,14 @@ export default function VideogameCreated(){
         rating:"",
         platforms: [],
         genres:[],
-	    image: "" 
+	    image: ""
     });
 
     useEffect(() => {
         dispatch(getGenres());
     }, [dispatch]);
+    
+    
 
     function handleChange(e){ //funcion para modificar el input segun lo que se escriba
         setInput({
@@ -141,14 +142,15 @@ export default function VideogameCreated(){
         } else {
             dispatch(postVideogame(input)); //despacho al store la creacion del videojuego con lo que el usuario dio por input
             alert("Videojuego creado con éxito!");
-            setInput({  //limpio el input luego de creado
+            setInput({  //limpio el input luego de crear el juego
             name: "",
             description: "",
             released:"",
             rating:"",
             platforms: [],
             genres:[],
-            image: "" 
+            image: ""
+            
             });
         }
     }
@@ -172,17 +174,17 @@ export default function VideogameCreated(){
             <Link to="/home">
                 <button className={style.boton}>Volver al Home</button>
             </Link>
-            <h1 className={style.h1}>Crear juego</h1>
             <form className={style.form} onSubmit={e => handleSubmit(e)}>
+                <h1 className={style.h1}>Crea tu juego</h1>
                 <div>
                     <input
-                    className={style.input}
-                    type="text"
-                    value={input.name}
-                    name="name"
-                    onChange={e => handleChange(e)}
-                    required
-                    placeholder="Introduzca un Nombre"
+                       className={style.input}
+                       type="text"
+                       value={input.name}
+                       name="name"
+                       onChange={e => handleChange(e)}
+                       required
+                       placeholder="Introduzca un Nombre"
                     />
                     {errors.name && (
                         <p className={style.error}>{errors.name}</p>  //si un error existe renderiza el texto de error
@@ -190,13 +192,13 @@ export default function VideogameCreated(){
                 </div>
                 <div>
                     <input
-                    className={style.input}
-                    type="text"
-                    value={input.description}
-                    name="description"
-                    onChange={e => handleChange(e)}
-                    required
-                    placeholder="Introduzca una Descripción"
+                       className={style.input}
+                       type="text"
+                       value={input.description}
+                       name="description"
+                       onChange={e => handleChange(e)}
+                       required
+                       placeholder="Introduzca una Descripción"
                     />
                     {errors.description && (
                         <p className={style.error}>{errors.description}</p>
@@ -204,13 +206,13 @@ export default function VideogameCreated(){
                 </div>
                 <div>
                     <input
-                    className={style.input}
-                    type="text"
-                    value={input.released}
-                    name="released"
-                    onChange={e => handleChange(e)}
-                    required
-                    placeholder="Introduzca una Fecha de lanzamiento"
+                       className={style.input}
+                       type="text"
+                       value={input.released}
+                       name="released"
+                       onChange={e => handleChange(e)}
+                       required
+                       placeholder="Introduzca una Fecha de lanzamiento"
                     />
                     {errors.released && (
                         <p className={style.error}>{errors.released}</p>
@@ -218,13 +220,13 @@ export default function VideogameCreated(){
                 </div>
                 <div>
                     <input
-                    className={style.input}
-                    type="text"
-                    value={input.rating}
-                    name="rating"
-                    onChange={e => handleChange(e)}
-                    required
-                    placeholder="Introduzca un Rating"
+                       className={style.input}
+                       type="text"
+                       value={input.rating}
+                       name="rating"
+                       onChange={e => handleChange(e)}
+                       required
+                       placeholder="Introduzca un Rating"
                     />
                     {errors.rating && (
                         <p className={style.error}>{errors.rating}</p>
@@ -232,13 +234,13 @@ export default function VideogameCreated(){
                 </div>
                 <div>
                     <input
-                    className={style.input}
-                    type="text"
-                    value={input.image}
-                    name="image"
-                    onChange={e => handleChange(e)}
-                    required
-                    placeholder="Introduzca una imagen"
+                       className={style.input}
+                       type="text"
+                       value={input.image}
+                       name="image"
+                       onChange={e => handleChange(e)}
+                       required
+                       placeholder="Introduzca una imagen"
                     />
                     {errors.image && (
                         <p className={style.error}>{errors.image}</p>
@@ -259,8 +261,8 @@ export default function VideogameCreated(){
                 <button className={style.botonCrear} type="submit">Crear juego</button>
             </form>
             <div>
-            {input.genres.map(data => ( //renderiza cada genero que se vaya añadiendo al input como un boton
-                <div className={style.divG}>
+                {input.genres.map(data => ( //renderiza cada genero que se vaya añadiendo al input como un boton
+                    <div className={style.divG}>
                         <button className={style.botonG} onClick={() => handleDeleteGenre(data)}>{data}</button>
                     </div>
                 ))} {/* agarra mis generos y va renderizando cada cosa que selecciono */}
@@ -269,7 +271,7 @@ export default function VideogameCreated(){
                         <button className={style.botonP} onClick={() => handleDeletePlatforms(data)}>{data}</button>
                     </div>
                 ))}
-                </div>
+            </div>
         </div>
     )
 }

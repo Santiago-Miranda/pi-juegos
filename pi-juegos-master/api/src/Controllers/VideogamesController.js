@@ -34,17 +34,14 @@ const getApiInfo = async function () {
                 genres: data.genres.map(data => data.name)
             }
         })
-
         return apiInfo
     } catch (error) {
         console.log(error)
     }
 
-
 }
 
 const getDbInfo = async function () { //busca en la base de datos cualquier info que incluya el modelo genero y su atributo name y que sea un array
-
     try {
         let gameDb = await Videogame.findAll({ //en una variable guardo la pedida a la DB de los juegos que incluyan el modelo genero
             include: {
@@ -93,6 +90,4 @@ const getAllVideogames = async function () {
     }
 }
 
-module.exports = {
-    getAllVideogames
-}
+module.exports = { getAllVideogames }
