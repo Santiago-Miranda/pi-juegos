@@ -126,7 +126,7 @@ router.delete("/:id", (req, res) =>{
 
 
 
-router.put("/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
     const { id } = req.params
     const { name, description, rating, released, platforms, image } = req.body;
     try {
@@ -146,59 +146,15 @@ router.put("/:id", async (req, res) => {
             }
         );
 
-        const genre = await Videogame.findByPk(id)
-        await genre.setVideogame(id)
-        res.json(genre)
-        res.status(200).send("Vamos la puta madreeee")
+        res.status(200).send("Juego actualizado correctamente")
     } catch (error) {
-        res.status(404).send("No se actualizo la Actividad");
+        res.status(404).send("No se pudo actualizar el juego");
     }
 })
 
 
 
-router.patch("/:id", async (req, res)=>{
-        
-        const { id, name, description, released, rating, genres, image, platforms } = req.body;
-    
-        if (!id || !name || !description || !released || !rating || !image || !platforms) {
-            return res.status(400).json({
-                message: "Completa todos los campos",
-            });
-        }
-    
-        let platformString = platforms.join(", ");
-    
-        try {
-            let game = await Videogame.findByPk(id);
-    
-            game.name = name;
-            game.description = description;
-            game.released = released;
-            game.rating = rating;
-            game.image = image;
-            game.platforms = platformString;
-    
-            await game.save();
-    
-            let genresGame = [];
-            for (const g of genres) {
-                genresGame.push(await Genre.findOne({ where: { name: g } }));
-            }
-            await game.setGenres(genresGame);
-    
-            game = {
-                ...game.dataValues,
-                genres: genres
-                    .map((g) => g)
-                    .join(", "),
-            };
-    
-            return res.status(200).json(game);
-        } catch (error) {
-            return res.status(404).json(error);
-    };
-})
+
 
 
 module.exports = router;

@@ -4,6 +4,7 @@ import style from "./LandingPage.module.css"
 
 export default function LandingPage(){
     return(
+        <div className={style.maxcontainer}>
         <div className={style.container}>
             <div className={style.container_botton}>
                 <button className={style.boton}>
@@ -11,6 +12,7 @@ export default function LandingPage(){
                 </button>
             
             </div>
+        </div>
         </div>
     )
 }

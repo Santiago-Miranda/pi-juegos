@@ -36,7 +36,7 @@ export default function Detail(){
                 <div className={style.container_delete}>
                   <p>{id && id.length > 6?
                   <button className={style.delete} onClick={()=>{
-                  dispatch(deleteVideogame(id))}}>Delete juego</button>
+                  dispatch(deleteVideogame(id))}}>Delete</button>
                   :
                   <></>
                   }</p>

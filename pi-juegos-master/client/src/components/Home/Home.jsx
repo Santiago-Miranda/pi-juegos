@@ -156,7 +156,7 @@ return (
                  allVideogames={allVideogames.length}    //estos serian los params para el componente
                  paginado={paginado} 
                 />
-                {currentPage === currentPage.length ? <div></div> :
+                {currentPage === 7 ? <div></div> :
                 //cuando esta en la ultima pagina no muestres el boton
                 <button onClick={()=> handlerNext()} className={style.paginado_orden}>{">"}</button>
                 }

@@ -1,11 +1,10 @@
 body {
   margin: 0;
-  background: url("https://images.alphacoders.com/106/1062064.jpg");
+  background: url("../Imagenes/horz.jpg");
   background-color: rgb(0, 0, 0);
   background-size:cover;
-  width: 100vw;
-  height: 100vw;
-  position: absolute;
+
+
 }
 
 .card{

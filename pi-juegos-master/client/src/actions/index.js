@@ -112,16 +112,6 @@ export function deleteVideogame(id){//eliminar videojuego
     }
 }
 
-export function updateVideogame(id){//actualizar videojuego
-    return async function(dispatch){
-        await axios.put(`http://localhost:3001/videogame/${id}`)
-        dispatch({
-            type: "UPDATE_VIDEOGAME",
-            payload: id
-        })
-    }
-}
-
 export function guardarPage(payload){
    return function(dispatch){
     return dispatch({
